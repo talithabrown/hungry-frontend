@@ -1,13 +1,693 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+main {
+    padding: 10px;
+    margin-top: 70px;
+    margin-bottom: 50px;
+    font-family: 'Comfortaa', cursive;
+    max-width: 400px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.displayNone {
+    display: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #BC8034;
+    /* background-color: black; */
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+h1 {
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.5rem;
+    color: white;
+    margin: 15px 20px;
+}
+
+header img {
+    margin-right: 30px;
+}
+
+.nav-top {
+    display: none;
+}
+
+.mobile-nav object {
+    width: 30px;
+    filter:  brightness(0) invert(1);
+}
+
+.mobile-nav img {
+    width: 30px;
+    filter:  brightness(0) invert(1);
+}
+
+.mobile-nav {
+    display: flex;
+    justify-content: space-evenly;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    /* background-color: #2C2C2C; */
+    background-color: #BC8034;
+    /* background-color: black; */
+    width: 100%;
+}
+
+.mobile-nav a {
+    width: 100%;
+    text-align: center;
+    padding: 8px 0px;
+}
+
+.active {
+    /* background-color: #E4CAA8; */
+    /* filter:  brightness(0) invert(1); */
+    background-color: #B87215;
+    /* background-color: black; */
+}
+
+.hideAlert {
+    display: none;
+}
+
+.errorAlert {
+    border: 2px red solid;
+    padding: 0px 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.successAlert {
+    border: 2px green solid;
+    padding: 0px 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.errorAlertHome {
+    z-index: 2;
+    position: fixed;
+    width: 380px;
+    background-color: white;
+    border: 2px red solid;
+    padding: 0px 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .alert-close-img {
+    margin-right: 10px;
+} */
+
+/* ***************************** HOME ****************************** */
+
+.cart-item-count-p {
+    z-index: 1;
+    position: fixed;
+    top: -6px;
+    right: 11px;
+    background-color: black;
+    color: white;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 14px;
+}
+
+.search {
+    border: 1px solid #A9B1B5;
+    padding: 5px;
+    display: flex;
+}
+
+.search input {
+    border: none;
+    height: 25px;
+    margin: 0px 5px;
+}
+
+.search img {
+    vertical-align: middle;
+}
+
+.location-div {
+    display: flex;
+    gap: 10px;
+}
+
+.location-and-filter-icon-div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: -10px;
+}
+
+.location-and-distance-form {
+    position: fixed;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.post-div {
+    margin-bottom: 50px;
+}
+
+.post-div hr {
+    margin-bottom: 25px;
+}
+
+.food-img {
+    width: 100%;
+    max-height: 420px;
+}
+
+.food-img-placeholder {
+    background-color: #e9ecef;
+}
+
+.star {
+    width: 18px;
+}
+
+.user-posted-div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.post-profile-img, .post-profile-img-placeholder {
+    width: 50px;
+    border-radius: 30%;
+}
+
+.post-div h2 {
+    margin: 0px;
+    font-size: 1.9em;
+}
+
+.add-to-cart-button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #B5D863;
+    border-radius: 8px;
+    line-height: 20.4px;
+    float: right;
+    font-family: 'Ubuntu', sans-serif; 
+    margin-top: 10px;
+}
+
+.add-to-cart-button img {
+    margin-left: 10px;
+    width: 20px;
+    vertical-align: middle;
+}
+
+.post-cart-div {
+    float: right;
+    background-color: #B5D863;
+    padding: 5px 15px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    gap: 20px;
+}
+
+.post-cart-div p {
+    margin: 0px;
+    align-self: center;
+}
+
+.post-cart-div .cart-item-quantity-button {
+    /* background-color: black;
+    color: white; */
+    /* background-color: #80b918; */
+    border: none;
+    font-size: 1.5em;
+    padding: 0px;
+    margin: 0px;
+    background-color: #B5D863;
+}
+
+.ingredients-h3-and-down-arrow-div {
+    display: flex;
+    gap: 10px;
+}
+
+.ingredients-h3-and-down-arrow-div h3 {
+    margin: 0px;
+}
+
+.ingredients-ul {
+    display: none;
+    margin-top: 10px;
+    padding-left: 30px;
+}
+
+.serving-left-p {
+    float: right;
+    margin-top: -20px;
+}
+
+/* ***************************** Post detail page ****************************** */
+
+.post-detail-back-edit-delete-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-detail-edit-delete-options-div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.post-detail-edit-delete-options-div a {
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.edit-post-link {
+    background-color: #80b918;
+    color: white;
+}
+
+.delete-post-link {
+    background-color: red;
+    color: white;
+}
+
+/* ***************************** Delete post page ****************************** */
+
+.delete-post-buttons-div button{
+    border: none;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.cancel-delete-post a{
+    text-decoration: none;
+    color: black;
+}
+
+.confirm-delete-post {
+    background-color: red;
+    color: white;
+}
+
+/* ***************************** BUTTONS ****************************** */
+
+.submit {
+    width: 175px;
+    margin-top: 25px;
+    /* background-color:#B5D863; */
+    /* background-color: #BC8034; */
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 25px 10px 25px;
+    font-family: 'Ubuntu', sans-serif;  
+}
+
+.buttonHolderDiv {
+    text-align: center;
+}
+
+/* ***************************** FORMS ****************************** */
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 1px;
+    color: #6c757d;
+    font-size: 15px;
+}
+
+.radio-label {
+    display: inline;
+}
+
+input{
+    width: 100%;
+    height: 40px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-size: 14px;
+    border: 1px solid #adb5bd;
+    padding-left: 10px;
+    font-family: 'Comfortaa', cursive;
+}
+
+input[type='radio'] {
+    height: 15px;
+    width: 15px;
+    margin-right: 5px;
+    accent-color: #B5D863;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid #B5D863;
+}
+
+textarea {
+    width: 100%;
+    height: 70px;
+    margin: 0px;
+    box-sizing: border-box;
+    resize: none; 
+    border: 1px solid #adb5bd;
+    padding: 10px;
+    font-family: 'Comfortaa', cursive;
+}
+
+textarea:focus {
+    outline: none;
+    border: 2px solid #B5D863;
+}
+
+form {
+    padding: 20px;
+    border-radius: 5px;
+    /* border: 5px solid #B5D863; */
+    /* border: 5px solid #BC8034;; */
+    border: 5px solid black;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+form h2 {
+    text-align: center;
+    margin-top: 5px;
+}
+/* ***************************** LOGIN ************************* */
+
+
+.create-profile-link-div {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.create-profile-link-div a {
+    text-decoration: none;
+    color: black;
+}
+
+
+/* ***************************** CREATE PROFILE ************************* */
+
+
+.create-profile-div {
+    margin: -8px;
+    padding: 8px;
+}
+
+input[type='file'] {
+    border: none;
+    padding-left: 0px;
+}
+/* ***************************** POST PAGE ****************************** */
+
+#post-main {
+    padding: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-family: 'Comfortaa', cursive;
+}
+
+#post-form-div .top-label {
+    display: block;
+    margin-top: 25px;
+    margin-bottom: 5px;
+}
+
+/* #post-form-div {
+    border: solid black 2px;
+    padding: 15px;
+} */
+
+#post-button {
+    padding: 5px 15px;
+    border: none;
+    background-color: #B5D863;
+    border-radius: 8px;
+    line-height: 20.4px;
+    font-family: 'Ubuntu', sans-serif; 
+    margin-top: 15px;
+}
+
+#post-image {
+    width: 280px;
+}
+
+#add-image-button {
+    float: right;
+}
+
+#delivery-p {
+    margin-bottom: 10px;
+    margin-top: 25px;
+}
+
+.radio {
+    margin-bottom: 5px;
+}
+
+#date, #time {
+    width: 185px;
+}
+
+/* ***************************** MEGGAGES PAGE ****************************** */
+
+#messages-main {
+    padding: 20px;
+    margin-top: 70px;
+    margin-bottom: 50px;
+    font-family: 'Comfortaa', cursive;
+}
+
+.message-div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* ***************************** PROFILE PAGE ****************************** */
+
+.profileMenuOpened {
+    display: block;
+    width: 150px;
+    height: 100%;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    background-color: #2c2c2c;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    padding-left: 20px;
+    font-family: 'Comfortaa', cursive;
+}
+
+.profileMenuOpened a {
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+}
+
+.profileMenuOpened p {
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+}
+
+.profileMenuClosed {
+    width: 0px;
+    display: none;
+}
+
+.closebtn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 36px;
+    filter:  brightness(0) invert(1);
+}
+
+#profile-main {
+    padding: 20px;
+    margin-top: 70px;
+    margin-bottom: 50px;
+    font-family: 'Comfortaa', cursive;
+}
+
+.profile-image {
+    width: 150px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.profile-img-and-bio-p {
+    display: flex;
+    gap: 10px;
+}
+
+.profile-stats-div {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.stars-div img{
+    width: 18px;
+}
+
+.stars-div {
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.profile-posts-category-labels {
+    display: flex;
+    text-align: center;
+}
+
+.past-posts-p {
+    border-bottom: 2px solid black;
+    flex-grow: 1;
+}
+
+.upcoming-p {
+    flex-grow: 1;
+}
+
+.upcoming-menu-div div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.upcoming-menu-div {
+    display: none;
+}
+
+.profile-posts-div {
+    display: grid;
+    /* display: none; */
+    gap: 5px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.profile-posts-div img {
+    width: 100%;
+    height: 140px;
+    background-color: #e9ecef;
+}
+
+/* ***************************** NEW POST PAGE ****************************** */
+
+#add-ingredient-div {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    border: 1px solid #adb5bd;
+}
+
+#add-ingredient-div input {
+    border: none;
+}
+
+.single-ingredient-div input {
+    border: none;
+}
+
+.single-ingredient-div {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    border: 1px solid #adb5bd;
+}
+
+.single-ingredient-div img {
+    filter: invert(7%) sepia(91%) saturate(5800%) hue-rotate(342deg) brightness(128%) contrast(110%);
+    margin-right: 5px;
+}
+
+.add-ingredient-img {
+    transform: rotate(45deg);
+    filter: invert(54%) sepia(23%) saturate(1294%) hue-rotate(57deg) brightness(99%) contrast(87%);
+    margin-right: 5px;
+    margin-top: 4px;
+    z-index: 5;
+}
+
+/* ***************************** CART ****************************** */
+
+.cart-item-div img {
+    width: 30%;
+    max-height: 150px;
+}
+
+.cart-item-div {
+    display: flex;
+    gap: 10px;
+}
+
+.cart-item-details h3{
+    margin-top: 5px;
+}
+
+.cart-item-details p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.remove-cart-item-p {
+    color: red;
+    cursor: pointer;
+}
+
+.cart-item-quantity-button {
+    margin: 0px 7px;
+    padding: 2px 7px;
+    border: 1px solid #80b918;
+    /* border: none; */
+    border-radius: 10px;
+    background-color: white;
+}
+
+.cart-total-price-and-checkout-button-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-checkout-button {
+    padding: 10px 25px;
+    border: none;
+    background-color: #B5D863;
+    border-radius: 8px;
+    float: right;
+    font-family: 'Ubuntu', sans-serif;
+    max-height: 40px;
 }
