@@ -153,11 +153,11 @@ header img {
 }
 
 .location-and-distance-form {
-    position: fixed;
+    /* position: fixed; */
     background-color: white;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    width: 100%;
+    top: 10%;
 }
 
 .post-div {

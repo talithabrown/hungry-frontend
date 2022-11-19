@@ -20,48 +20,60 @@ function Home() {
     const [alertType, setAlertType] = useState([ 'hideAlert' ])
     const [alertMessage, setAlertMessage] = useState([ '' ])
 
+
     useEffect(() => {
-        ////////////////////////
-        const getPosts = async (position) => {
 
-            console.log(position)
-            const { latitude, longitude } = position.coords;
-            // const latitude = 33.448376
-            // const longitude = -112.074036
-
-            //const postsFromServer = await fetchPosts()
-            const postsFromServer = await fetchPosts(latitude, longitude)
-
-            const R = 3959; // earth's mean radius in miles
-            const sin = Math.sin, cos=Math.cos, acos = Math.acos;
-            const π = Math.PI;
-    
-            postsFromServer.forEach(p => { p.distance = acos(sin(p.latitude*π/180)*sin(latitude*π/180) +
-            cos(p.latitude*π/180)*cos(latitude*π/180)*cos(p.longitude*π/180-longitude*π/180)) * R })
-    
-            // filter for points with distance from bounding circle centre less than distance, and sort
-            const postsWithinDistance = postsFromServer.filter(p => p.distance < distance).sort((a, b) => a.d - b.d);
-    
-            setPosts(postsWithinDistance)
-
-            setLocationText(latitude, longitude)
+        const getDeviceCoords = () => {
+            navigator.geolocation.getCurrentPosition(success, setLocationErrorOrDenied)
         }
-        //getPosts()
+        getDeviceCoords()
+
         ////////////////////
         const getCart = async () => {
             const cartFromServer = await fetchCart()
             setCart(cartFromServer)
         }
         getCart()
-        ////////////////////
-        const getLocation = async () => {
-            navigator.geolocation.getCurrentPosition(getPosts, setLocationErrorOrDenied)
-            //const locationFromDevice = userLocation()
-            //setLocation(locationFromDevice)
-        }
-        getLocation()
 
     }, [])
+
+    const success = (position) => {
+        const { latitude , longitude } = position.coords
+        console.log(latitude)
+        console.log(longitude)
+        getPosts(latitude, longitude)
+    }
+
+    const setLocationErrorOrDenied = () => {
+        setAlertType('errorAlert')
+        setAlertMessage('Please enter location')
+    }
+
+    const filterPostsByDistance = (latitude, longitude, postsFromServer) => {
+        const R = 3959; // earth's mean radius in miles
+        const sin = Math.sin, cos=Math.cos, acos = Math.acos;
+        const π = Math.PI;
+
+        postsFromServer.forEach(p => { p.distance = acos(sin(p.latitude*π/180)*sin(latitude*π/180) +
+        cos(p.latitude*π/180)*cos(latitude*π/180)*cos(p.longitude*π/180-longitude*π/180)) * R })
+
+        // filter for points with distance from bounding circle centre less than distance, and sort
+        const postsWithinDistance = postsFromServer.filter(p => p.distance < distance).sort((a, b) => a.d - b.d);
+
+        return postsWithinDistance
+    }
+
+
+    const getPosts = async (latitude, longitude) => {
+
+        const postsFromServer = await fetchPosts(latitude, longitude)
+        const postsWithinDistance = filterPostsByDistance(latitude, longitude, postsFromServer)
+
+        setPosts(postsWithinDistance)
+
+        setLocationText(latitude, longitude)
+    }
+
 
     //Fetch Cart
     const fetchCart = async () => {
@@ -74,13 +86,10 @@ function Home() {
 
     //Fetch posts
     const fetchPosts = async (latitude, longitude) => {
-        // console.log(position)
-        // const { latitude, longitude } = position.coords;
+        //const { latitude, longitude } = position.coords;
 
         const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/posts/?lat=${latitude}&lon=${longitude}&radius=${distance}`)
         const data = await res.json()
-
-        //console.log(data)
         return data.results
     }
 
@@ -271,26 +280,21 @@ function Home() {
 
             const res = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=dc7eec97ddbf4410b65fc759b653e65b`)
             let response = await res.json()
-            if (response.results[0].components.village) {
-                setLocation(`${response.results[0].components.village} ${response.results[0].components.state_code}`)
-            }
-            else if (response.results[0].components.city) {
-                setLocation(`${response.results[0].components.city} ${response.results[0].components.state_code}`)
-            }
-            else if (response.results[0].components.county) {
-                setLocation(`${response.results[0].components.county} ${response.results[0].components.state_code}`)
-            }
-            else {
-                setLocation('Please enter location')
+            if (response.results[0]) {
+                if (response.results[0].components.village) {
+                    setLocation(`${response.results[0].components.village} ${response.results[0].components.state_code}`)
+                }
+                else if (response.results[0].components.city) {
+                    setLocation(`${response.results[0].components.city} ${response.results[0].components.state_code}`)
+                }
+                else if (response.results[0].components.county) {
+                    setLocation(`${response.results[0].components.county} ${response.results[0].components.state_code}`)
+                }
+                else {
+                    setLocation('Please enter location')
+                }
             }
     }
-
-
-    const setLocationErrorOrDenied = () => {
-        setAlertType('errorAlert')
-        setAlertMessage('Please enter location')
-    }
-
 
     return (
         <>
@@ -303,14 +307,10 @@ function Home() {
                     <img src="/images/search.svg" alt="search icon"></img>
                     <input type="text"></input>
                 </div>
-                <div className="location-and-filter-icon-div">
-                    {/* <div className="location-div">
-                        <img src="/images/map-pin.svg" alt="location icon"></img>
-                        <p>{location} - {distance} mi</p>
-                    </div> */}
-                    <LocationAndDistance setDistance={setDistance} setLocation={setLocation} distance={distance} location={location}/>
-                    <img src="/images/filter.svg" alt="filter icon"></img>
-                </div>
+                {/* <div className="location-and-filter-icon-div"> */}
+                    <LocationAndDistance setDistance={setDistance} setLocation={setLocation} distance={distance} location={location} getPosts={getPosts}/>
+                    {/* <img src="/images/filter.svg" alt="filter icon"></img> */}
+                {/* </div> */}
 
                 <Posts posts={posts} onAdd={addPostToCart} cart={cart} updateCartItemQuantityAndPostServings={updateCartItemQuantityAndPostServings}/>
 
