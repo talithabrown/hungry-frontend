@@ -30,8 +30,10 @@ function Home() {
 
         ////////////////////
         const getCart = async () => {
-            const cartFromServer = await fetchCart()
-            setCart(cartFromServer)
+            if (localStorage.getItem('cart_id')) {
+                const cartFromServer = await fetchCart()
+                setCart(cartFromServer)
+            }
         }
         getCart()
 
@@ -39,8 +41,6 @@ function Home() {
 
     const success = (position) => {
         const { latitude , longitude } = position.coords
-        console.log(latitude)
-        console.log(longitude)
         getPosts(latitude, longitude)
     }
 
@@ -80,7 +80,7 @@ function Home() {
         const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/carts/${localStorage.getItem('cart_id')}/`)
         const data = await res.json()
 
-        console.log(data)
+        //console.log(data)
         return data
     }
 

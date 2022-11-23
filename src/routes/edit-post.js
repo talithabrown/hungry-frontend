@@ -10,7 +10,7 @@ const EditPost = () => {
     const [alertMessage, setAlertMessage] = useState([ '' ])
 
 
-    const editPost = async (title, description, price, servings, datetime, delivery, location, ingredientsArray, originalIngredients, postImage, postImageId) => {
+    const editPost = async (title, description, price, servings, datetime, delivery, location, ingredientsArray, originalIngredients, postImage, postImageId, latitude, longitude) => {
         
         let pickUp = false
 
@@ -36,7 +36,9 @@ const EditPost = () => {
             "ready_date_time": datetime,
             "servings_available": servings,
             "location": location,
-            "user": localStorage.getItem('profile_id')
+            "user": localStorage.getItem('profile_id'),
+            "latitude": latitude,
+            "longitude": longitude
         }
 
 
@@ -174,7 +176,7 @@ const EditPost = () => {
           if (response2.ok) {
               window.scrollTo(0,0)
               setAlertType('successAlert')
-              setAlertMessage('Successfully Posted!')
+              setAlertMessage('Successfully Updated!')
           }
           else {
               let data = response2.json()
@@ -187,7 +189,7 @@ const EditPost = () => {
         else {
             window.scrollTo(0,0)
             setAlertType('successAlert')
-            setAlertMessage('Successfully Posted!')
+            setAlertMessage('Successfully Updated!')
         }
  
     }

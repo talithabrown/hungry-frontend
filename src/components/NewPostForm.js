@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import IngredientsForm from './IngredientsForm'
+import PostLocation from './PostLocation'
 
 const NewPostForm = ({ onSubmitPost }) => {
 
@@ -12,6 +13,9 @@ const NewPostForm = ({ onSubmitPost }) => {
   const [location, setLocation] = useState('')
   //const [ingredients, setIngredients] = useState('')
   const [postImage, setPostImage] = useState()
+
+  const [latitude, setLatitude] = useState()
+  const [longitude, setLongitude] = useState()
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -31,7 +35,7 @@ const NewPostForm = ({ onSubmitPost }) => {
 
     console.log(ingredientsArray)
 
-    onSubmitPost(title, description, price, servings, datetime, delivery, location, ingredientsArray, postImage)
+    onSubmitPost(title, description, price, servings, datetime, delivery, location, ingredientsArray, postImage, latitude, longitude)
   }
 
 
@@ -72,8 +76,9 @@ const NewPostForm = ({ onSubmitPost }) => {
             <input type='datetime-local' required value={datetime} onChange={(e) => setDatetime(e.target.value)}/>
         </div>
         <div className='form-control'>
-            <label>Location:</label>
-            <input type='text' required value={location} onChange={(e) => setLocation(e.target.value)}/>
+            <label>*Location:</label>
+            {/* <input type='text' required value={location} onChange={(e) => setLocation(e.target.value)}/> */}
+            <PostLocation setLocation={setLocation} setLatitude={setLatitude} setLongitude={setLongitude} location={location}/>
         </div>
         {/* <div className='form-control'>
             <label>Ingredients:</label>

@@ -2,8 +2,9 @@ const PostProfileImage = ({ image }) => {
 
     if (image) {
         if (image !== undefined && image !== '') {
+            const imgLink = 'https://res.cloudinary.com/heblzeanc/image/upload/v1/' + image;
             return (
-                <img className="post-profile-img" src={image} alt="post profile"></img>
+                <img className="post-profile-img" src={imgLink} alt="post profile"></img>
             )
         }
         else {

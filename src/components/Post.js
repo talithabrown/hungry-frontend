@@ -15,8 +15,8 @@ const Post = ({ post, onAdd, cart, updateCartItemQuantityAndPostServings }) => {
         <hr></hr>
           <h2>{post.title}</h2>
           <div className="user-posted-div">
-            <PostProfileImage image={post.user.image}/>
-            <p>{post.user.username}</p>
+            <PostProfileImage image={post.user_info.image}/>
+            <p>{post.user_info.username}</p>
             <div>
               <img className="star" src="/images/star.svg" alt="star"></img>
               <img className="star" src="/images/star.svg" alt="star"></img>

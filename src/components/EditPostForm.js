@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import EditIngredientsForm from './EditIngredientsForm'
+import PostLocation from './PostLocation'
 
 const EditPostForm = ({ onSubmitPost }) => {
 
@@ -14,6 +15,8 @@ const EditPostForm = ({ onSubmitPost }) => {
   const [originalIngredients, setOriginalIngredients] = useState([])
   const [postImage, setPostImage] = useState()
   const [postImageId, setPostImageId] = useState()
+  const [latitude, setLatitude] = useState()
+  const [longitude, setLongitude] = useState()
 
   const [post, setPost] = useState('')
 
@@ -27,7 +30,13 @@ const EditPostForm = ({ onSubmitPost }) => {
         setServings(postFromServer.servings_available)
         setIngredients(postFromServer.ingredients)
         setOriginalIngredients(postFromServer.ingredients)
-        setPostImageId(postFromServer.images[0].id)
+        //setPostImageId(postFromServer.images[0].id)
+        setLatitude(postFromServer.latitude)
+        setLongitude(postFromServer.longitude)
+
+        if (postFromServer.images[0]) {
+            setPostImageId(postFromServer.images[0].id)
+        }
 
         if (postFromServer.delivery === true && postFromServer.pick_up === true) {
             setDelivery('both')
@@ -84,7 +93,7 @@ const EditPostForm = ({ onSubmitPost }) => {
         }
     }
 
-    onSubmitPost(title, description, price, servings, datetime, delivery, location, ingredientsArray, originalIngredients, postImage, postImageId)
+    onSubmitPost(title, description, price, servings, datetime, delivery, location, ingredientsArray, originalIngredients, postImage, postImageId, latitude, longitude)
   }
 
   return (
@@ -123,8 +132,9 @@ const EditPostForm = ({ onSubmitPost }) => {
             <input type='datetime-local' id="ready-date-time" required value={datetime} onChange={(e) => setDatetime(e.target.value)}/>
         </div>
         <div className='form-control'>
-            <label>Location:</label>
-            <input type='text' required value={location} onChange={(e) => setLocation(e.target.value)}/>
+            <label>Update Location:</label>
+            <PostLocation setLocation={setLocation} setLatitude={setLatitude} setLongitude={setLongitude} location={location}/>
+            {/* <input type='text' required value={location} onChange={(e) => setLocation(e.target.value)}/> */}
         </div>
         <EditIngredientsForm ingredients={ingredients}/>
         <div className='form-control'>

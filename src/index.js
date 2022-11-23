@@ -17,6 +17,7 @@ import EditPost from './routes/edit-post';
 import DeletePost from './routes/delete-post';
 import Demo from './components/CropImage';
 import DeletePostSuccessful from './routes/delete-post-successful';
+import Payment from './routes/payment';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -36,6 +37,7 @@ root.render(
         <Route path='delete-post' element={<PrivateRoute><DeletePost /></PrivateRoute>} />
         <Route path='delete-post-successful' element={<PrivateRoute><DeletePostSuccessful /></PrivateRoute>} />
         <Route path='crop' element={<Demo />} />
+        <Route path='payment' element={<PrivateRoute><Payment /></PrivateRoute>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

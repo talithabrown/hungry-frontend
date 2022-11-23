@@ -11,8 +11,16 @@ const NewPost = () => {
     const [alertMessage, setAlertMessage] = useState([ '' ])
     //const [postId, setpostId] = useState([ '' ])
 
-    const newPost = async (title, description, price, servings, datetime, delivery, location, ingredientsArray, postImage) => {
+    const newPost = async (title, description, price, servings, datetime, delivery, 
+                          location, ingredientsArray, postImage, latitude, longitude) => {
         
+        if (!location || !latitude || !longitude) {
+          setAlertType('errorAlert')
+          setAlertMessage('Location is required.')
+          window.scrollTo(0,0)
+          return
+        }
+
         let pickUp = false
 
         if (delivery === 'both') {
@@ -37,7 +45,9 @@ const NewPost = () => {
             "ready_date_time": datetime,
             "servings_available": servings,
             "location": location,
-            "user": localStorage.getItem('profile_id')
+            "user": localStorage.getItem('profile_id'),
+            "latitude": latitude,
+            "longitude": longitude
         }
 
 

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import PlacesAutocomplete, {
   geocodeByAddress,
-  geocodeByPlaceId,
   getLatLng
 } from 'react-places-autocomplete';
 
@@ -29,7 +28,7 @@ const LocationAndDistance = ({ setDistance, setLocation, distance, location, get
     const results = await geocodeByAddress(value)
     //console.log(results)
     const ll  = await getLatLng(results[0])
-    console.log(ll)
+    //console.log(ll)
     setLatitude(ll.lat)
     setLongitude(ll.lng)
     setAddress(value)

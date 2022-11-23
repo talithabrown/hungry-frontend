@@ -17,7 +17,7 @@ const Login = () => {
         "username": username,
         "password": password
       }
-      console.log(JSON.stringify(accountInfo))
+      //console.log(JSON.stringify(accountInfo))
       const res = await fetch('https://hungry-backend-api.herokuapp.com/auth/jwt/create/', 
       {
           method: 'POST',

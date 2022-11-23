@@ -8,7 +8,7 @@ const PostImages = ({ images }) => {
         }
         else {
             return (
-                <img className="food-img-placeholder" src='/images/user.svg' alt='placeholder profile icon' />
+                <img className="food-img-placeholder" src='/images/free_fork_icon_grey.svg' alt='placeholder profile icon' />
             )
         }
     }

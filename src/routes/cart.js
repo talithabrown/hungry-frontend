@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import CartItem from "../components/CartItem"
@@ -6,6 +7,8 @@ import Price from "../components/Price"
 import Alert from '../components/Alert'
 
 function Cart() {
+
+    let navigate = useNavigate()
 
     const [cart, setCart] = useState([])
 
@@ -19,7 +22,7 @@ function Cart() {
         }
 
         getCart()
-        console.log(cart)
+        //console.log(cart)
     }, [])
 
     //Fetch cart
@@ -27,7 +30,7 @@ function Cart() {
         const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/carts/${localStorage.getItem('cart_id')}/`)
         const data = await res.json()
 
-        console.log(data)
+        //console.log(data)
         return data
     }
 
@@ -157,6 +160,10 @@ function Cart() {
         }
     }
 
+    const navigateToPayment = () => {
+        navigate('/payment')
+    }
+
 
     const closeAlert = () => {
         setAlertType('hideAlert')
@@ -175,7 +182,7 @@ function Cart() {
 
                     <div className="cart-total-price-and-checkout-button-div">
                         <h3>Total Price: <Price price={cart.total_price} /></h3>
-                        <button className="cart-checkout-button">Checkout</button>
+                        <button onClick={navigateToPayment}className="cart-checkout-button">Checkout</button>
                     </div>
         
                 </main>
