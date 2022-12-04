@@ -6,6 +6,8 @@ import Posts from '../components/Posts'
 import CartItemCount from "../components/CartItemCount"
 import Alert from "../components/Alert"
 import LocationAndDistance from "../components/LocationAndDistance"
+import Filter from "../components/Filter"
+import Search from "../components/Seach"
 
 function Home() {
 
@@ -22,6 +24,9 @@ function Home() {
 
 
     useEffect(() => {
+
+        localStorage.setItem('queryParams', '')
+        localStorage.setItem('searchParams', '')
 
         const getDeviceCoords = () => {
             navigator.geolocation.getCurrentPosition(success, setLocationErrorOrDenied)
@@ -41,7 +46,11 @@ function Home() {
 
     const success = (position) => {
         const { latitude , longitude } = position.coords
+        localStorage.setItem('lat', latitude)
+        localStorage.setItem('lon', longitude)
         getPosts(latitude, longitude)
+
+        setLocationText(latitude, longitude)
     }
 
     const setLocationErrorOrDenied = () => {
@@ -64,14 +73,19 @@ function Home() {
     }
 
 
-    const getPosts = async (latitude, longitude) => {
+    // const getPosts = async (latitude, longitude) => {
+    const getPosts = async () => {
 
-        const postsFromServer = await fetchPosts(latitude, longitude)
-        const postsWithinDistance = filterPostsByDistance(latitude, longitude, postsFromServer)
+            const lat = localStorage.getItem('lat')
+            const lon = localStorage.getItem('lon')
+    
+            const postsFromServer = await fetchPosts(lat, lon)
+            const postsWithinDistance = filterPostsByDistance(lat, lon, postsFromServer)
+    
+            console.log(postsWithinDistance)
+    
+            setPosts(postsWithinDistance)
 
-        setPosts(postsWithinDistance)
-
-        setLocationText(latitude, longitude)
     }
 
 
@@ -86,10 +100,21 @@ function Home() {
 
     //Fetch posts
     const fetchPosts = async (latitude, longitude) => {
-        //const { latitude, longitude } = position.coords;
 
-        const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/posts/?lat=${latitude}&lon=${longitude}&radius=${distance}`)
+        //const { latitude, longitude } = position.coords;
+        let queryParams = localStorage.getItem('queryParams')
+        let searchParams = localStorage.getItem('searchParams')
+        let url = `https://hungry-backend-api.herokuapp.com/main/posts/?lat=${latitude}&lon=${longitude}&radius=${distance}`
+        if (queryParams !== undefined && queryParams !== null) {
+           url = url + queryParams
+        }
+        if (searchParams !== undefined && searchParams != null) {
+            url = url + '&' + searchParams
+        }
+
+        const res = await fetch(url)
         const data = await res.json()
+        localStorage.setItem('post-results', JSON.stringify(data.results))
         return data.results
     }
 
@@ -303,14 +328,20 @@ function Home() {
             <main id="home-main">
                 <Alert message={alertMessage} type={alertType} closeAlert={closeAlert}/>
 
-                <div className="search">
+                {/* <div className="search">
                     <img src="/images/search.svg" alt="search icon"></img>
                     <input type="text"></input>
-                </div>
+                    <button>Go</button>
+                </div> */}
+                <Search getPosts={getPosts}/>
                 {/* <div className="location-and-filter-icon-div"> */}
                     <LocationAndDistance setDistance={setDistance} setLocation={setLocation} distance={distance} location={location} getPosts={getPosts}/>
-                    {/* <img src="/images/filter.svg" alt="filter icon"></img> */}
-                {/* </div> */}
+                    {/* <img src="/images/filter.svg" alt="filter icon"></img>
+                </div> */}
+
+                {/* <img src="/images/filter.svg" alt="filter icon"></img> */}
+
+                <Filter getPosts={getPosts}/>
 
                 <Posts posts={posts} onAdd={addPostToCart} cart={cart} updateCartItemQuantityAndPostServings={updateCartItemQuantityAndPostServings}/>
 

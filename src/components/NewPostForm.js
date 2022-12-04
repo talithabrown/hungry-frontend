@@ -20,22 +20,33 @@ const NewPostForm = ({ onSubmitPost }) => {
   const onSubmit = (e) => {
     e.preventDefault()
     
-
     let ingredientElements = document.getElementsByClassName('ingredients')
 
     Array.from(ingredientElements)
 
     let ingredientsArray = []
-
     for (let i = 0; i < ingredientElements.length; i++) {
         if (ingredientElements[i].value !== '' && ingredientElements[i].value !== undefined) {
             ingredientsArray.push(ingredientElements[i].value.trim())
         }
     }
+    //console.log(ingredientsArray)
 
-    console.log(ingredientsArray)
+    ///////////////
+    let categoryElements = document.getElementsByName('category')
 
-    onSubmitPost(title, description, price, servings, datetime, delivery, location, ingredientsArray, postImage, latitude, longitude)
+     let categoriesArray = []
+     for (let i = 0; i < categoryElements.length; i++) {
+        if (categoryElements[i].checked) {
+            categoriesArray.push(parseInt(categoryElements[i].value))
+        }
+    }
+    console.log(categoriesArray)
+
+
+    /////////////
+
+    onSubmitPost(title, description, price, servings, datetime, delivery, location, ingredientsArray, categoriesArray, postImage, latitude, longitude)
   }
 
 
@@ -85,6 +96,54 @@ const NewPostForm = ({ onSubmitPost }) => {
             <input type='text' value={ingredients} onChange={(e) => setIngredients(e.target.value)}/>
         </div> */}
         <IngredientsForm />
+
+        <label>Select all that apply:</label>
+
+        <div className='form-control checkbox category'>
+                <input type="checkbox" id="category-7" name="category" value="7"/>
+                <label htmlFor="category-7"> Vegetarian</label>
+        </div>
+        <div className='form-control checkbox category'>
+            <input type="checkbox" id="category-6" name="category" value="6" />
+            <label htmlFor="category-6"> Vegan</label>
+        </div>
+        <div className='form-control checkbox category'>
+            <input type="checkbox" id="category-5" name="category" value="5" />
+            <label htmlFor="category-5"> Keto</label>
+        </div>
+        <div className='form-control checkbox category'>
+            <input type="checkbox" id="category-8" name="category" value="8" />
+            <label htmlFor="category-8"> Healthy</label>
+        </div>
+        <div className='form-control checkbox category'>
+            <input type="checkbox" id="category-11" name="category" value="11" />
+            <label htmlFor="category-11"> Dessert</label>
+        </div>
+        <div className='form-control checkbox category'>
+            <input type="checkbox" id="category-10" name="category" value="10" />
+            <label htmlFor="category-10"> Sweet</label>
+        </div>
+        <div className='form-control checkbox category'>
+            <input type="checkbox" id="category-1" name="category" value="1" />
+            <label htmlFor="category-1"> American</label>
+        </div>
+        <div className='form-control checkbox category'>
+            <input type="checkbox" id="category-2" name="category" value="2" />
+            <label htmlFor="category-2"> Mexican</label>
+        </div>
+        <div className='form-control checkbox category'>
+            <input type="checkbox" id="category-3" name="category" value="3" />
+            <label htmlFor="category-3"> Asian</label>
+        </div>
+        <div className='form-control checkbox category'>
+            <input type="checkbox" id="category-4" name="category" value="4" />
+            <label htmlFor="category-4"> Italian</label>
+        </div>
+        <div className='form-control checkbox category'>
+            <input type="checkbox" id="category-9" name="category" value="9" />
+            <label htmlFor="category-9"> Pasta</label>
+        </div>
+
         <div className='form-control'>
             <label>Photo:</label>
             <input type='file' onChange={(e) => setPostImage(e.target.files[0])}/>

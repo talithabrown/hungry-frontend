@@ -22,6 +22,7 @@ header {
     top: 0px;
     left: 0px;
     width: 100%;
+    z-index: 3;
 }
 
 h1 {
@@ -113,7 +114,7 @@ header img {
 /* ***************************** HOME ****************************** */
 
 .cart-item-count-p {
-    z-index: 1;
+    z-index: 4;
     position: fixed;
     top: -6px;
     right: 11px;
@@ -141,6 +142,12 @@ header img {
     vertical-align: middle;
 }
 
+.search-go-button {
+    border: none;
+    background-color: #B5D863;
+    border-radius: 5px;
+}
+
 .location-div {
     display: flex;
     gap: 10px;
@@ -158,6 +165,13 @@ header img {
     box-sizing: border-box;
     width: 100%;
     top: 10%;
+    margin-bottom: 20px;
+}
+
+.filter-div {
+    display: flex;
+    gap: 10px;
+    margin-top: -10px;
 }
 
 .post-div {
@@ -208,7 +222,7 @@ header img {
     line-height: 20.4px;
     float: right;
     font-family: 'Ubuntu', sans-serif; 
-    margin-top: 10px;
+    margin-top: 0px;
 }
 
 .add-to-cart-button img {
@@ -222,7 +236,7 @@ header img {
     background-color: #B5D863;
     padding: 5px 15px;
     margin-left: 20px;
-    margin-top: 10px;
+    margin-top: 0px;
     margin-bottom: 10px;
     border-radius: 8px;
     display: flex;
@@ -361,6 +375,21 @@ input[type='radio'] {
     width: 15px;
     margin-right: 5px;
     accent-color: #B5D863;
+}
+
+input[type='checkbox'] {
+    height: 17px;
+    width: 17px;
+    accent-color: #B5D863;
+    margin-left: 15px;
+}
+
+.checkbox label{
+    display: inline;
+}
+
+.checkbox {
+    margin-top: 10px;
 }
 
 input:focus {
@@ -514,12 +543,15 @@ input[type='file'] {
     text-decoration: none;
     font-size: 15px;
     color: white;
+    display: block;
+    margin-top: 15px;
 }
 
 .profileMenuOpened p {
     text-decoration: none;
     font-size: 15px;
     color: white;
+    margin-top: 15px;
 }
 
 .profileMenuClosed {
@@ -543,8 +575,8 @@ input[type='file'] {
 }
 
 .profile-image {
-    width: 150px;
-    height: 200px;
+    width: 100px;
+    height: 140px;
     border-radius: 10px;
 }
 
@@ -557,14 +589,12 @@ input[type='file'] {
     display: flex;
     justify-content: space-between;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin-left: 7px;
 }
 
-.stars-div img{
-    width: 18px;
-}
-
-.stars-div {
+.profile-main .rating-stars-div {
     margin-left: 5px;
     margin-top: 5px;
 }
@@ -705,4 +735,76 @@ input[type='file'] {
     border-radius: 8px;
     font-family: 'Ubuntu', sans-serif;
     max-height: 40px;
+}
+
+/* ***************************** PURCHASE HISTORY ****************************** */
+
+.order-item-div img {
+    max-height: 150px;
+    width: 100px;
+}
+
+.order-item-div {
+    display: flex;
+    gap: 10px;
+}
+
+.order-item-div h3 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.order-item-div p {
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.order-item-div button {
+    padding: 7px 25px;
+    border: none;
+    background-color: #B5D863;
+    color: black;
+    border-radius: 8px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* ***************************** Review ****************************** */
+
+.review-post-title-p {
+    font-size: 14px;
+}
+
+.review-text-p {
+    border: 1px solid #9DA5AD;
+    padding: 10px;
+}
+.rating-stars-div {
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+
+.rating-stars-div img {
+    width: 20px;
+}
+
+.review-div button {
+    padding: 7px 25px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.edit-review-button {
+    background-color: #80b918;
+    color: white;
+    margin-right: 10px
+}
+
+.delete-review-button {
+    color: white;
+    background-color: red;
+}
+
+.edit-review-button-holder-div {
+    text-align: right;
 }

@@ -18,6 +18,15 @@ import DeletePost from './routes/delete-post';
 import Demo from './components/CropImage';
 import DeletePostSuccessful from './routes/delete-post-successful';
 import Payment from './routes/payment';
+import OrderSuccessful from './routes/order-successful';
+import PurchaseHistory from './routes/purchase-history';
+import NewReview from './routes/new-review';
+import ReviewsWrittenByYou from './routes/reviews-written-by-you';
+import EditReview from './routes/edit-review';
+import DeleteReview from './routes/delete-review';
+import ProfileReviews from './routes/profile-reviews';
+import ViewProfile from './routes/view-profile';
+import DeleteProfile from './routes/delete-profile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -38,6 +47,15 @@ root.render(
         <Route path='delete-post-successful' element={<PrivateRoute><DeletePostSuccessful /></PrivateRoute>} />
         <Route path='crop' element={<Demo />} />
         <Route path='payment' element={<PrivateRoute><Payment /></PrivateRoute>} />
+        <Route path='order-successful' element={<PrivateRoute><OrderSuccessful /></PrivateRoute>} />
+        <Route path='purchase-history' element={<PrivateRoute><PurchaseHistory /></PrivateRoute>} />
+        <Route path='new-review' element={<PrivateRoute><NewReview /></PrivateRoute>} />
+        <Route path='reviews-written-by-you' element={<PrivateRoute><ReviewsWrittenByYou /></PrivateRoute>} />
+        <Route path='edit-review' element={<PrivateRoute><EditReview /></PrivateRoute>} />
+        <Route path='delete-review' element={<PrivateRoute><DeleteReview /></PrivateRoute>} />
+        <Route path='profile-reviews' element={<PrivateRoute><ProfileReviews /></PrivateRoute>} />
+        <Route path='view-profile' element={<ViewProfile />} />
+        <Route path='delete-profile' element={<PrivateRoute><DeleteProfile /></PrivateRoute>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

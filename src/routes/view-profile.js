@@ -4,46 +4,14 @@ import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import ProfilePostsDiv from '../components/ProfilePostsDiv'
-import Logout from '../components/Logout'
 import RatingStars from '../components/RatingStars'
 
 // /auth/users/me and pass JWT access token in request header or request body
 // /main/userprofiles/me/ and pass JWT access token
 
-const Profile = () => {
+const ViewProfile = () => {
 
     let navigate = useNavigate()
-
-    const [user, setUser] = useState([])
-
-    useEffect(() => {
-        const getUser = async () => {
-            const userFromServer = await fetchUser()
-            setUser(userFromServer)
-        }
-
-        getUser()
-    }, [])
-
-    const fetchUser = async () => {
-        const res = await fetch('https://hungry-backend-api.herokuapp.com/auth/users/me/',
-        {
-            method: 'GET',
-            headers: {
-              'Authorization': 'JWT '+ localStorage.getItem('jwtAccess'), 
-              'Content-type': 'application/json'
-            }
-        })
-        const data = await res.json()
-
-        localStorage.setItem('username', data.username)
-        localStorage.setItem('firstName', data.first_name)
-        localStorage.setItem('lastName', data.last_name)
-        localStorage.setItem('email', data.email)
-        
-        //console.log(data)
-        return data
-    }
 
     //////////////////////
 
@@ -79,17 +47,14 @@ const Profile = () => {
     ///////////////////////
 
     const fetchProfile = async () => {
-        const res = await fetch('https://hungry-backend-api.herokuapp.com/main/userprofiles/me/',
+        const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/userprofiles/${localStorage.getItem('view_profile_id')}/`,
         {
             method: 'GET',
             headers: {
-              'Authorization': 'JWT '+ localStorage.getItem('jwtAccess'), 
               'Content-type': 'application/json'
             }
         })
         const data = await res.json()
-        localStorage.setItem('profile_id', data.id)
-        localStorage.setItem('bio', data.bio)
 
         //console.log(data)
 
@@ -99,11 +64,10 @@ const Profile = () => {
     //////////////////////////
 
     const fetchProfilePosts = async () => {
-        const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/userprofiles/${localStorage.getItem("profile_id")}/posts`,
+        const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/userprofiles/${localStorage.getItem("view_profile_id")}/posts`,
         {
             method: 'GET',
             headers: {
-            'Authorization': 'JWT '+ localStorage.getItem('jwtAccess'), 
             'Content-type': 'application/json'
             }
         })
@@ -114,7 +78,7 @@ const Profile = () => {
     //////////////////////////
 
     const fetchProfileReviews = async () => {
-        const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/reviews/?profile=${localStorage.getItem('profile_id')}`,
+        const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/reviews/?profile=${localStorage.getItem('view_profile_id')}`,
         {
             method: 'GET',
             headers: {
@@ -148,45 +112,19 @@ const Profile = () => {
 
     const  navigateToProfileReviews = () => {
         localStorage.setItem('reviews_profile_id', profile.id)
-        localStorage.setItem('back-link', '/profile')
+        localStorage.setItem('back-link', '/view-profile')
         navigate('/profile-reviews')
     }
 
     //////////////////////////
 
-    const fullName = `${user.first_name} ${user.last_name}`
+    const fullName = `${profile.first_name} ${profile.last_name}`
 
-    /////////////////////////
-
-    const [profileMenuClass, setprofileMenuClass] = useState('profileMenuClosed')
-
-    const openCloseMenu = () => {
-
-        if (profileMenuClass === 'profileMenuClosed') {
-            setprofileMenuClass('profileMenuOpened')
-        }
-
-        else if (profileMenuClass === 'profileMenuOpened') {
-            setprofileMenuClass('profileMenuClosed')
-        }
-
-    }
-
-    ////////////////////////imgFunction={openCloseMenu}
 
     return (
         <div>
-            <Header text={fullName} imgSrc="/images/menu.svg" imgFunction={openCloseMenu}/>
-            <div className={`profileMenu ${profileMenuClass}`}>
-                <img className="closebtn" src='/images/x.svg' alt='exit button' onClick={openCloseMenu}/>
-                <Link to='/edit-profile'>Edit Profile</Link>
-                <Link to='/purchase-history'>Purchase History</Link>
-                <Link to='/reviews-written-by-you'>Reviews By You</Link>
-                {/* <Link to='/delete-profile'>Delete Profile</Link> */}
-                <Logout />
-            </div>
+            <Header text={fullName}/>
             <main className="profile-main">
-                {/* <Logout /> */}
                 <div className="profile-img-and-bio-p">
                     <img className="profile-image" src={profile.image} alt="profile"/>
                     <p className="bio">{profile.bio}</p>
@@ -198,7 +136,7 @@ const Profile = () => {
                     <p onClick={navigateToProfileReviews} className='profile-reviews-link'>{profileReviews.length} Reviews</p>
                 </div>
                 
-                <ProfilePostsDiv posts={profilePosts} edit={true}/>
+                <ProfilePostsDiv posts={profilePosts} edit={false}/>
 
             </main>
             <Footer />
@@ -207,4 +145,4 @@ const Profile = () => {
 
 }
 
-export default Profile
+export default ViewProfile

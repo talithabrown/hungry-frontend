@@ -40,6 +40,8 @@ const LocationAndDistance = ({ setDistance, setLocation, distance, location, get
     setLocation(address)
     setDistance(formDistance)
     setDisplayClassName('displayNone')
+    localStorage.setItem('lat', latitude)
+    localStorage.setItem('lon', longitude)
     getPosts(latitude, longitude)
   }
 
@@ -47,7 +49,7 @@ const LocationAndDistance = ({ setDistance, setLocation, distance, location, get
     <>
         <div className="location-div" onClick={() => setDisplayClassName('location-and-distance-form')}>
             <img src="/images/map-pin.svg" alt="location icon"></img>
-            <p>{location} - {distance} mi</p>
+            <p>{location} - {distance} miles</p>
         </div>
 
         <form className={displayClassName} onSubmit={onSubmit}>

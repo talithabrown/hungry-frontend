@@ -1,15 +1,14 @@
-import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-function DeletePostSuccessful() {
+function OrderSuccessful() {
 
     return (
         <>
             <Header text="Hungry" link="" imgSrc=""/>
             <main>
 
-                <h3>Deleted successfully!</h3>
+                <h3>Your order has been placed successfully!</h3>
 
             </main>
             <Footer />
@@ -18,4 +17,4 @@ function DeletePostSuccessful() {
 
 }
 
-export default DeletePostSuccessful
+export default OrderSuccessful

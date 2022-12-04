@@ -12,7 +12,7 @@ const NewPost = () => {
     //const [postId, setpostId] = useState([ '' ])
 
     const newPost = async (title, description, price, servings, datetime, delivery, 
-                          location, ingredientsArray, postImage, latitude, longitude) => {
+                          location, ingredientsArray, categoriesArray, postImage, latitude, longitude) => {
         
         if (!location || !latitude || !longitude) {
           setAlertType('errorAlert')
@@ -47,7 +47,8 @@ const NewPost = () => {
             "location": location,
             "user": localStorage.getItem('profile_id'),
             "latitude": latitude,
-            "longitude": longitude
+            "longitude": longitude,
+            "categories": categoriesArray
         }
 
 

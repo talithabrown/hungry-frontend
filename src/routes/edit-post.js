@@ -10,7 +10,7 @@ const EditPost = () => {
     const [alertMessage, setAlertMessage] = useState([ '' ])
 
 
-    const editPost = async (title, description, price, servings, datetime, delivery, location, ingredientsArray, originalIngredients, postImage, postImageId, latitude, longitude) => {
+    const editPost = async (title, description, price, servings, datetime, delivery, location, ingredientsArray, categoriesArray, originalIngredients, postImage, postImageId, latitude, longitude) => {
         
         let pickUp = false
 
@@ -38,7 +38,8 @@ const EditPost = () => {
             "location": location,
             "user": localStorage.getItem('profile_id'),
             "latitude": latitude,
-            "longitude": longitude
+            "longitude": longitude,
+            "categories": categoriesArray
         }
 
 

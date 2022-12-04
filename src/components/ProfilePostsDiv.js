@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 
-const ProfilePostsDiv = ({ posts }) => {
+const ProfilePostsDiv = ({ posts, edit }) => {
 
   let navigate = useNavigate()
 
@@ -22,6 +22,7 @@ const ProfilePostsDiv = ({ posts }) => {
 
   const sendToPostDetail = (postId) => {
     localStorage.setItem('post-detail-id', postId)
+    localStorage.setItem('edit-post-detail', edit)
     navigate('/post-detail')
   }
 

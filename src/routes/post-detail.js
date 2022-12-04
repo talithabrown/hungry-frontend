@@ -20,10 +20,18 @@ function PostDetail() {
     //Fetch posts
     const fetchPost = async () => {
         const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/posts/${localStorage.getItem('post-detail-id')}/`)
-        const data = await res.json()
+        const p = await res.json()
 
-        //console.log(data)
-        return data
+        const lat = localStorage.getItem('lat')
+        const lon = localStorage.getItem('lon')
+
+        const R = 3959; // earth's mean radius in miles
+        const sin = Math.sin, cos=Math.cos, acos = Math.acos;
+        const π = Math.PI;
+
+        p.distance = acos(sin(p.latitude*π/180)*sin(lat*π/180) + cos(p.latitude*π/180)*cos(lat*π/180)*cos(p.longitude*π/180-lon*π/180)) * R 
+
+        return p
     }
 
     // Add post to Cart
@@ -31,28 +39,46 @@ function PostDetail() {
         console.log(`Post with id ${id}, added to cart`)
     }
 
-    //console.log(post)
 
-    return (
-        <>
-            <Header text="Hungry" link="" imgSrc=""/>
-            <main id="home-main">
+    if (localStorage.getItem('edit-post-detail') === 'true') {
+        return (
+            <>
+                <Header text="Hungry" link="" imgSrc=""/>
+                <main id="home-main">
 
-                <div className="post-detail-back-edit-delete-div">
-                    <Link to='/profile' className="post-detail-back-link"><img src="/images/chevron-left.svg" alt="back icon"/></Link>
+                    <div className="post-detail-back-edit-delete-div">
+                        <Link to='/profile' className="post-detail-back-link"><img src="/images/chevron-left.svg" alt="back icon"/></Link>
 
-                    <div className="post-detail-edit-delete-options-div">
-                        <Link to='/edit-post' className="edit-post-link">Edit</Link>
-                        <Link to='/delete-post' className="delete-post-link">Delete</Link>
+                        <div className="post-detail-edit-delete-options-div">
+                            <Link to='/edit-post' className="edit-post-link">Edit</Link>
+                            <Link to='/delete-post' className="delete-post-link">Delete</Link>
+                        </div>
                     </div>
-                </div>
 
-                <Post post={post} onAdd={addPostToCart}/>
+                    <Post post={post} onAdd={addPostToCart}/>
 
-            </main>
-            <Footer />
-        </>
-    )
+                </main>
+                <Footer />
+            </>
+        )
+    }
+    else {
+        return (
+            <>
+                <Header text="Hungry" link="" imgSrc=""/>
+                <main id="home-main">
+
+                    <div className="post-detail-back-edit-delete-div">
+                        <Link to='/view-profile' className="post-detail-back-link"><img src="/images/chevron-left.svg" alt="back icon"/></Link>
+                    </div>
+
+                    <Post post={post} onAdd={addPostToCart}/>
+
+                </main>
+                <Footer />
+            </>
+        )
+    }
 
 }
 

@@ -12,8 +12,38 @@ const Payment = () => {
     const [alertType, setAlertType] = useState([ 'hideAlert' ])
     const [alertMessage, setAlertMessage] = useState([ '' ])
 
-    const placeOrder = () => {
-        
+    const placeOrder = async () => {
+        console.log('inside place order function')
+
+        let cartId = localStorage.getItem('cart_id')
+        const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/orders/`,
+        {
+            method: 'POST',
+            headers: {
+                'Authorization': 'JWT '+ localStorage.getItem('jwtAccess'), 
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                "cart_id": cartId
+            })
+        })
+        const response = await res
+        console.log(response.status)
+        if (response.ok) {
+            console.log('this was a success')
+            localStorage.removeItem('cart_id')
+            navigateToOrderSuccess()
+        } else {
+            console.log('There was an error posting order')
+            setAlertMessage('There was an error placing order')
+            setAlertType('errorAlert')
+        }
+        const data = await response.json()
+        console.log(data)
+    }
+
+    const navigateToOrderSuccess = () => {
+        navigate('/order-successful')
     }
 
 
@@ -25,6 +55,7 @@ const Payment = () => {
       <div>
           <Header text="Hungry" link="" imgSrc="" />
           <main className="login-main">
+          <Link to='/cart' className="post-detail-back-link"><img src="/images/chevron-left.svg" alt="back icon"/></Link>
             <Alert message={alertMessage} type={alertType} closeAlert={closeAlert}/>
             <form>
                 <div>
@@ -49,7 +80,8 @@ const Payment = () => {
                     </div>
                 </div>
 
-                <input onClick={placeOrder} type="submit" value="Checkout" className="payment-checkout-btn" />
+                {/* <input onClick={placeOrder} type="submit" value="Checkout" className="payment-checkout-btn" /> */}
+                <button onClick={placeOrder} className="payment-checkout-btn">Place Order</button>
             </form>
           </main>
           <Footer />
