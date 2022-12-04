@@ -29,7 +29,20 @@ function Home() {
         localStorage.setItem('searchParams', '')
 
         const getDeviceCoords = () => {
-            navigator.geolocation.getCurrentPosition(success, setLocationErrorOrDenied)
+            const lat = localStorage.getItem('lat')
+            const lon = localStorage.getItem('lon')
+            const locationText = localStorage.getItem('locationText')
+            if (lat == null || lon == null) {
+                navigator.geolocation.getCurrentPosition(success, setLocationErrorOrDenied)
+            }
+            else {
+                if (locationText != null) {
+                    setLocation(locationText)
+                }
+                else {
+                    setLocationText(lat, lon)
+                }
+            }
         }
         getDeviceCoords()
 
@@ -41,6 +54,8 @@ function Home() {
             }
         }
         getCart()
+
+        getPosts()
 
     }, [])
 
@@ -308,12 +323,15 @@ function Home() {
             if (response.results[0]) {
                 if (response.results[0].components.village) {
                     setLocation(`${response.results[0].components.village} ${response.results[0].components.state_code}`)
+                    localStorage.setItem('locationText', `${response.results[0].components.village} ${response.results[0].components.state_code}`)
                 }
                 else if (response.results[0].components.city) {
                     setLocation(`${response.results[0].components.city} ${response.results[0].components.state_code}`)
+                    localStorage.setItem('locationText', `${response.results[0].components.city} ${response.results[0].components.state_code}`)
                 }
                 else if (response.results[0].components.county) {
                     setLocation(`${response.results[0].components.county} ${response.results[0].components.state_code}`)
+                    localStorage.setItem('locationText', `${response.results[0].components.county} ${response.results[0].components.state_code}`)
                 }
                 else {
                     setLocation('Please enter location')

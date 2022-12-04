@@ -13,10 +13,10 @@ const Footer = () => {
     // </footer>
     <footer>
       <nav className="mobile-nav">
-          <Link to='/' className='active'><img src="/images/home.svg" alt="home icon"></img></Link>
-          <Link to=''><img src="/images/search.svg" alt="search icon"></img></Link>
+          <Link to='/'><img src="/images/home.svg" alt="home icon"></img></Link>
+          {/* <Link to=''><img src="/images/search.svg" alt="search icon"></img></Link> */}
           <Link to='/new-post'><img src="/images/plus-square.svg" alt="post icon"></img></Link>
-          <Link to=''><img src="/images/message-circle.svg" alt="message icon"></img></Link>
+          {/* <Link to=''><img src="/images/message-circle.svg" alt="message icon"></img></Link> */}
           <Link to='/profile'><img src="/images/user.svg" alt="user icon"></img></Link>
       </nav>  
     </footer>

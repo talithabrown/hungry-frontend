@@ -106,22 +106,6 @@ function Cart() {
         }
     }
 
-    // const updatePostServings = async (id, increaseOrDecrease) => {
-    //     const post = await fetchPost(id)
-    //     const updatePost = { ...post, servings_available: post.servings_available -= increaseOrDecrease }
-    //     const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/posts/${id}/`,
-    //     {
-    //         method: 'PUT',
-    //         headers: {
-    //             'Content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(updatePost)
-    //     })
-    //     const data = await res.json()
-
-    //     console.log(data.servings_available)
-    // }
-
 
     const updatePostServings = async (id, increaseOrDecrease) => {
         let message = ''
@@ -160,8 +144,9 @@ function Cart() {
         }
     }
 
-    const navigateToPayment = () => {
-        navigate('/payment')
+    const navigateToDeliveryOptions = () => {
+        localStorage.setItem('cart', JSON.stringify(cart))
+        navigate('/delivery-options')
     }
 
 
@@ -182,7 +167,7 @@ function Cart() {
 
                     <div className="cart-total-price-and-checkout-button-div">
                         <h3>Total Price: <Price price={cart.total_price} /></h3>
-                        <button onClick={navigateToPayment}className="cart-checkout-button">Checkout</button>
+                        <button onClick={navigateToDeliveryOptions}className="cart-checkout-button">Checkout</button>
                     </div>
         
                 </main>

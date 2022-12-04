@@ -808,3 +808,16 @@ input[type='file'] {
 .edit-review-button-holder-div {
     text-align: right;
 }
+
+/* ***************************** order delivery options ****************************** */
+
+.btn {
+    padding: 10px 25px;
+    border: none;
+    background-color: #B5D863;
+    color: black;
+    border-radius: 8px;
+    float: right;
+    font-family: 'Ubuntu', sans-serif;
+    max-height: 40px;
+}

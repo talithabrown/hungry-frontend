@@ -27,6 +27,7 @@ import DeleteReview from './routes/delete-review';
 import ProfileReviews from './routes/profile-reviews';
 import ViewProfile from './routes/view-profile';
 import DeleteProfile from './routes/delete-profile';
+import DeliveryOptions from './routes/delivery-options';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -56,6 +57,7 @@ root.render(
         <Route path='profile-reviews' element={<PrivateRoute><ProfileReviews /></PrivateRoute>} />
         <Route path='view-profile' element={<ViewProfile />} />
         <Route path='delete-profile' element={<PrivateRoute><DeleteProfile /></PrivateRoute>} />
+        <Route path='delivery-options' element={<DeliveryOptions />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

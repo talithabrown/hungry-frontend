@@ -42,6 +42,7 @@ const LocationAndDistance = ({ setDistance, setLocation, distance, location, get
     setDisplayClassName('displayNone')
     localStorage.setItem('lat', latitude)
     localStorage.setItem('lon', longitude)
+    localStorage.setItem('locationText', address)
     getPosts(latitude, longitude)
   }
 

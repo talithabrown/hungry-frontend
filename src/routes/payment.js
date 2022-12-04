@@ -2,7 +2,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import LoginForm from '../components/LoginForm'
 import Alert from '../components/Alert'
 
 const Payment = () => {
@@ -55,7 +54,7 @@ const Payment = () => {
       <div>
           <Header text="Hungry" link="" imgSrc="" />
           <main className="login-main">
-          <Link to='/cart' className="post-detail-back-link"><img src="/images/chevron-left.svg" alt="back icon"/></Link>
+          <Link to='/delivery-options' className="post-detail-back-link"><img src="/images/chevron-left.svg" alt="back icon"/></Link>
             <Alert message={alertMessage} type={alertType} closeAlert={closeAlert}/>
             <form>
                 <div>

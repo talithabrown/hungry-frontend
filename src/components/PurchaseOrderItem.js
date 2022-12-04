@@ -10,23 +10,45 @@ const PurchaseOrderItem = ({ orderItem, datetime }) => {
         navigate('/new-review')
     }
 
+    console.log(orderItem)
+
   
     if (orderItem) {
-        return (
-            <>
-                <div className='order-item-div'>
-                    <img src={orderItem.post.images[0].image} alt="order item thumbnail"></img>
-                    <div>
-                        <h3>{orderItem.post.title}</h3>
-                        <p>Quantity: {orderItem.quantity}</p>
-                        <p><Price price={orderItem.unit_price}/> each</p>
-                        <p>{datetime}</p>
-                        <button onClick={() => navigateToReviewForm(orderItem.post.id)}>Review</button>
+        if (orderItem.post.pick_up === true) {
+            return (
+                <>
+                    <div className='order-item-div'>
+                        <img src={orderItem.post.images[0].image} alt="order item thumbnail"></img>
+                        <div>
+                            <h3>{orderItem.post.title}</h3>
+                            <p>Quantity: {orderItem.quantity}</p>
+                            <p><Price price={orderItem.unit_price}/> each</p>
+                            <p>{datetime}</p>
+                            <button onClick={() => navigateToReviewForm(orderItem.post.id)}>Review</button>
+                        </div>
                     </div>
-                </div>
-                <hr></hr>
-            </>
-        )
+                    <p>Pick up at: {orderItem.post.location}</p>
+                    <hr></hr>
+                </>
+            )
+        }
+        if (orderItem.post.pick_up === false) {
+            return (
+                <>
+                    <div className='order-item-div'>
+                        <img src={orderItem.post.images[0].image} alt="order item thumbnail"></img>
+                        <div>
+                            <h3>{orderItem.post.title}</h3>
+                            <p>Quantity: {orderItem.quantity}</p>
+                            <p><Price price={orderItem.unit_price}/> each</p>
+                            <p>{datetime}</p>
+                            <button onClick={() => navigateToReviewForm(orderItem.post.id)}>Review</button>
+                        </div>
+                    </div>
+                    <hr></hr>
+                </>
+            )
+        }
     }
 }
 

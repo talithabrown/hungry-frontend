@@ -9,7 +9,6 @@ let navigate = useNavigate()
     localStorage.removeItem('jwtRefresh')
     localStorage.removeItem('profile_id')
     localStorage.removeItem('user_id')
-    localStorage.clear()
     navigate('/login')
   }
 
