@@ -174,9 +174,10 @@ const Profile = () => {
 
     ////////////////////////imgFunction={openCloseMenu}
 
+    if (profile && user) {
     return (
         <div>
-            <Header text={fullName} imgSrc="/images/menu.svg" imgFunction={openCloseMenu}/>
+            <Header text={user.username} imgSrc="/images/menu.svg" imgFunction={openCloseMenu}/>
             <div className={`profileMenu ${profileMenuClass}`}>
                 <img className="closebtn" src='/images/x.svg' alt='exit button' onClick={openCloseMenu}/>
                 <Link to='/edit-profile'>Edit Profile</Link>
@@ -204,6 +205,7 @@ const Profile = () => {
             <Footer />
         </div>
     )
+    }
 
 }
 
