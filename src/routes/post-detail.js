@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Post from '../components/Post'
 
 function PostDetail() {
@@ -58,7 +57,6 @@ function PostDetail() {
                     <Post post={post} onAdd={addPostToCart}/>
 
                 </main>
-                <Footer />
             </>
         )
     }
@@ -75,7 +73,6 @@ function PostDetail() {
                     <Post post={post} onAdd={addPostToCart}/>
 
                 </main>
-                <Footer />
             </>
         )
     }

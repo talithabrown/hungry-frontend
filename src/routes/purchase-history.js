@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Alert from '../components/Alert'
 import PurchaseOrder from "../components/PurchaseOrder"
 
@@ -81,7 +80,6 @@ function PurchaseHistory() {
                     ))}
         
                 </main>
-                <Footer />
             </>
         )
     }
@@ -94,7 +92,6 @@ function PurchaseHistory() {
                     <p>You have no past orders</p>
 
                 </main>
-                <Footer />
             </>
         )
     }

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Header from "../components/Header"
-import Footer from "../components/Footer"
 import PickUpItems from "../components/PickUpItems"
 import AutoCompleteAddressInput from "../components/AutoCompleteAddressInput"
 
@@ -35,8 +34,6 @@ function DeliveryOptions() {
     // console.log('hey out here')
 
     const init = () => {
-
-        console.log('here')
         let pickupItemsArray = []
         let deliveryItemsArray = []
         let bothItemsArray = []
@@ -50,6 +47,7 @@ function DeliveryOptions() {
             }
             else if (cart.items[i].post.pick_up === true) {
                 pickupItemsArray.push(cart.items[i])
+                console.log(cart.items[i])
             }
         }
 
@@ -57,17 +55,21 @@ function DeliveryOptions() {
         localStorage.setItem('deliveryItemsArray', JSON.stringify(deliveryItemsArray))
         localStorage.setItem('bothItemsArray', JSON.stringify(bothItemsArray))
 
-        // console.log(pickupItemsArray)
-        // console.log(deliveryItemsArray)
-        // console.log(bothItemsArray)
 
         if (bothItemsArray.length === 0) {
-            setDisplayClassNameDeliveryDiv('show')
-            setDisplayClassNamePickupDiv('show')
-            setDisplayClassNameButton('show')
             setDisplayClassNameSelect('displayNone')
+            setDisplayClassNameButton('show')
+            if (deliveryItemsArray.length > 0) {
+                setDisplayClassNameDeliveryDiv('show')
+            }
+            if (pickupItemsArray.length > 0) {
+                setPickupItems(pickupItemsArray)
+                setDisplayClassNamePickupDiv('show')
+            }
         }
-    }
+
+    } 
+    // END of init
 
     const concatDeliveryItemsString = () => {
         let deliveryItemsArray = JSON.parse(localStorage.getItem('deliveryItemsArray'))
@@ -168,19 +170,15 @@ function DeliveryOptions() {
         }
 
         if (pickupItemsArray.length > 0) {
+            console.log(pickupItemsArray)
             setPickupItems(pickupItemsArray)
             setDisplayClassNamePickupDiv('show')
         }
         setDisplayClassNameButton('show')
 
     }
+    // END of sort and show items
 
-    const toggleDisplay = () => {
-        setDisplayClassNameDeliveryDiv('displayNone')
-        setDisplayClassNamePickupDiv('displayNone')
-        setDisplayClassNameButton('displayNone')
-        setDisplayClassNameSelect('select-delivery-option-div')
-    }
 
     const navigateToPayment = () => {
         navigate('/payment')
@@ -230,7 +228,6 @@ function DeliveryOptions() {
 
 
         </main>
-        <Footer />
 
       </div>
     )

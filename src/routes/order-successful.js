@@ -1,5 +1,4 @@
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 
 function OrderSuccessful() {
 
@@ -11,7 +10,6 @@ function OrderSuccessful() {
                 <h3>Your order has been placed successfully!</h3>
 
             </main>
-            <Footer />
         </>
     )
 

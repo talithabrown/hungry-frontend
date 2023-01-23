@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import ProfilePostsDiv from '../components/ProfilePostsDiv'
 import RatingStars from '../components/RatingStars'
 
@@ -139,7 +138,6 @@ const ViewProfile = () => {
                 <ProfilePostsDiv posts={profilePosts} edit={false}/>
 
             </main>
-            <Footer />
         </div>
     )
 

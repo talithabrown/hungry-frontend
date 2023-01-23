@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import ProfilePostsDiv from '../components/ProfilePostsDiv'
 import Logout from '../components/Logout'
 import RatingStars from '../components/RatingStars'
@@ -177,9 +176,10 @@ const Profile = () => {
     if (profile && user) {
     return (
         <div>
-            <Header text={user.username} imgSrc="/images/menu.svg" imgFunction={openCloseMenu}/>
+            <Header text={user.username} imgSrc="/images/more-horizontal.svg" imgFunction={openCloseMenu}/>
             <div className={`profileMenu ${profileMenuClass}`}>
                 <img className="closebtn" src='/images/x.svg' alt='exit button' onClick={openCloseMenu}/>
+                <Link to='/new-post'>New Post</Link>
                 <Link to='/edit-profile'>Edit Profile</Link>
                 <Link to='/purchase-history'>Purchase History</Link>
                 <Link to='/reviews-written-by-you'>Reviews By You</Link>
@@ -202,7 +202,6 @@ const Profile = () => {
                 <ProfilePostsDiv posts={profilePosts} edit={true}/>
 
             </main>
-            <Footer />
         </div>
     )
     }

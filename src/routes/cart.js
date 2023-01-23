@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import CartItem from "../components/CartItem"
 import Price from "../components/Price"
 import Alert from '../components/Alert'
@@ -171,7 +170,6 @@ function Cart() {
                     </div>
         
                 </main>
-                <Footer />
             </>
         )
     }
@@ -184,7 +182,6 @@ function Cart() {
                     <p>There are no items in your cart</p>
 
                 </main>
-                <Footer />
             </>
         )
     }

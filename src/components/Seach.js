@@ -17,21 +17,29 @@ const Search = ({ getPosts }) => {
             localStorage.setItem('searchParams', searchParams)
         }
         else {
-            localStorage.setItem('searchParams', '')
+            localStorage.removeItem('searchParams')
         }
-        getPosts()
-
+    }
+    else {
+      localStorage.removeItem('searchParams')
+      console.log("I'm here :)")
     }
 
-
+    getPosts()
     /////
 
   }
 
+  const checkForEnterKey = (event) => {
+    if (event.key === "Enter") {
+        search()
+    }
+}
+
   return (
     <div className="search">
         <img src="/images/search.svg" alt="search icon"></img>
-        <input type="text" id='search-input'></input>
+        <input type="text" id='search-input' onKeyUp={checkForEnterKey}></input>
         <button className="search-go-button" onClick={search}>Go</button>
     </div>
   )

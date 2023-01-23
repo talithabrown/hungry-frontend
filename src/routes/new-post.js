@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Alert from '../components/Alert'
 import NewPostForm from '../components/NewPostForm'
 
@@ -185,7 +184,6 @@ const NewPost = () => {
             <Alert message={alertMessage} type={alertType} closeAlert={closeAlert}/>
             <NewPostForm onSubmitPost={newPost}/>
           </main>
-          <Footer />
       </div>
     )
   }

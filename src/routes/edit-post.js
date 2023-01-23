@@ -1,6 +1,5 @@
 import { useState } from "react"
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Alert from '../components/Alert'
 import EditPostForm from '../components/EditPostForm'
 
@@ -206,7 +205,6 @@ const EditPost = () => {
             <Alert message={alertMessage} type={alertType} closeAlert={closeAlert}/>
             <EditPostForm onSubmitPost={editPost}/>
           </main>
-          <Footer />
       </div>
     )
   }

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Posts from '../components/Posts'
 import CartItemCount from "../components/CartItemCount"
 import Alert from "../components/Alert"
@@ -97,7 +96,13 @@ function Home() {
             const postsFromServer = await fetchPosts(lat, lon)
             const postsWithinDistance = filterPostsByDistance(lat, lon, postsFromServer)
     
-            console.log(postsWithinDistance)
+            //console.log(postsWithinDistance)
+            if (postsWithinDistance.length === 0) {
+                document.getElementById('no-posts-to-show-p').classList = 'no-posts-p'
+            } 
+            else {
+                document.getElementById('no-posts-to-show-p').classList = 'displayNone'
+            }
     
             setPosts(postsWithinDistance)
 
@@ -123,13 +128,15 @@ function Home() {
         if (queryParams !== undefined && queryParams !== null) {
            url = url + queryParams
         }
-        if (searchParams !== undefined && searchParams != null) {
+        if (searchParams !== undefined && searchParams != null && searchParams !== '') {
             url = url + '&' + searchParams
         }
 
+        showLoadingDiv()
         const res = await fetch(url)
         const data = await res.json()
         localStorage.setItem('post-results', JSON.stringify(data.results))
+        hideLoadingDiv()
         return data.results
     }
 
@@ -315,6 +322,16 @@ function Home() {
         setAlertType('hideAlert')
     }
 
+    const showLoadingDiv = () => {
+        let loadingDiv = document.getElementById('loading-div')
+        loadingDiv.classList = 'show-loading-div'
+    }
+
+    const hideLoadingDiv = () => {
+        let loadingDiv = document.getElementById('loading-div')
+        loadingDiv.classList = 'displayNone'
+    }
+
 
     const setLocationText = async (latitude, longitude) => {
 
@@ -346,25 +363,20 @@ function Home() {
             <main id="home-main">
                 <Alert message={alertMessage} type={alertType} closeAlert={closeAlert}/>
 
-                {/* <div className="search">
-                    <img src="/images/search.svg" alt="search icon"></img>
-                    <input type="text"></input>
-                    <button>Go</button>
-                </div> */}
                 <Search getPosts={getPosts}/>
-                {/* <div className="location-and-filter-icon-div"> */}
-                    <LocationAndDistance setDistance={setDistance} setLocation={setLocation} distance={distance} location={location} getPosts={getPosts}/>
-                    {/* <img src="/images/filter.svg" alt="filter icon"></img>
-                </div> */}
-
-                {/* <img src="/images/filter.svg" alt="filter icon"></img> */}
-
+                <LocationAndDistance setDistance={setDistance} setLocation={setLocation} distance={distance} location={location} getPosts={getPosts}/>
                 <Filter getPosts={getPosts}/>
+
+                <div id="loading-div" class="displayNone">
+                    <p>Loading...</p>
+                    <div class="loader"></div>
+                </div>
 
                 <Posts posts={posts} onAdd={addPostToCart} cart={cart} updateCartItemQuantityAndPostServings={updateCartItemQuantityAndPostServings}/>
 
+                <p id="no-posts-to-show-p" className="displayNone">No posts to show. Try different search or different filters. Try different location.</p>
+
             </main>
-            <Footer />
         </>
     )
 

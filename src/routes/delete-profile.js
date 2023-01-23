@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from "react"
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Alert from '../components/Alert'
 
 function DeleteProfile() {
@@ -80,7 +79,6 @@ function DeleteProfile() {
                 </div>
 
             </main>
-            <Footer />
         </>
     )
 

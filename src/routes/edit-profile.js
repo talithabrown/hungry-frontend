@@ -1,7 +1,6 @@
 import { useState } from "react"
 import EditProfileForm from '../components/EditProfileForm'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Alert from '../components/Alert'
 
 const EditProfile = () => {
@@ -112,7 +111,6 @@ const EditProfile = () => {
             <Alert message={alertMessage} type={alertType} closeAlert={closeAlert}/>
             <EditProfileForm onSubmitProfile={editProfile}/>
             </main>
-            <Footer />
         </div>
       )
     }

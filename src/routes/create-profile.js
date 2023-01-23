@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import CreateProfileForm from '../components/CreateProfileForm'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Alert from '../components/Alert'
 
 const CreateProfile = () => {
@@ -108,7 +107,6 @@ const CreateProfile = () => {
           <Alert message={alertMessage} type={alertType} closeAlert={closeAlert}/>
           <CreateProfileForm onSubmitProfile={createProfile}/>
           </main>
-          <Footer />
       </div>
     )
   }

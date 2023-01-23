@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Alert from '../components/Alert'
 import Review from "../components/Review"
 
@@ -63,7 +62,6 @@ function ReviewsWrittenByYou() {
                     ))}
         
                 </main>
-                <Footer />
             </>
         )
     }
@@ -77,7 +75,6 @@ function ReviewsWrittenByYou() {
                     <p>You have not written any reviews yet. To give a review go to your purchase history</p>
 
                 </main>
-                <Footer />
             </>
         )
     }

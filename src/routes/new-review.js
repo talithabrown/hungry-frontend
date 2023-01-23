@@ -1,6 +1,5 @@
 import { useState } from "react"
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Alert from '../components/Alert'
 import NewReviewForm from "../components/NewReviewForm"
 
@@ -103,7 +102,6 @@ const NewReview = () => {
             <Alert message={alertMessage} type={alertType} closeAlert={closeAlert}/>
             <NewReviewForm onSubmitReview={newReview}/>
           </main>
-          <Footer />
       </div>
     )
   }

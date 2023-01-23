@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import LoginForm from '../components/LoginForm'
 import Alert from '../components/Alert'
 
@@ -53,7 +52,6 @@ const Login = () => {
               <Link to='/create-profile'>Create Account</Link>
             </div>
           </main>
-          <Footer />
       </div>
     )
   }

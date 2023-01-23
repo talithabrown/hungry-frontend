@@ -2,8 +2,6 @@ import PickUpItem from "./PickUpItem"
 
 const PickUpItems = ({ items }) => {
 
-  //console.log(posts)
-
   return (
     <>
         {items.map((item) => (
