@@ -105,5 +105,3 @@ const LocationAndDistance = ({ setDistance, setLocation, distance, location, get
 }
 
 export default LocationAndDistance
-
-// AIzaSyA8Ft9_0KtBRqn7_QWi06CaxjtMe824ufc

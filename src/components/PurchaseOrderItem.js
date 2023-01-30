@@ -10,8 +10,6 @@ const PurchaseOrderItem = ({ orderItem, datetime }) => {
         navigate('/new-review')
     }
 
-    console.log(orderItem)
-
   
     if (orderItem) {
         if (orderItem.post.pick_up === true) {

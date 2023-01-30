@@ -55,7 +55,6 @@ const EditPost = () => {
 
         if (response1.status === 400) {
             const data = await response1.json()
-            console.log(data)
             setAlertType('errorAlert')
             if (data.title) {
               setAlertMessage(data.title)
@@ -135,8 +134,6 @@ const EditPost = () => {
 
               let response3 = await res3
               if (!response3.ok) {
-                  let data = response3.json()
-                  console.log(data)
                   window.scrollTo(0,0)
                   setAlertType('errorAlert')
                   setAlertMessage('Something went wrong, please try again')
@@ -151,8 +148,6 @@ const EditPost = () => {
 
             let response4 = await res4
               if (!response4.ok) {
-                  let data = response4.json()
-                  console.log(data)
                   window.scrollTo(0,0)
                   setAlertType('errorAlert')
                   setAlertMessage('Something went wrong, please try again')

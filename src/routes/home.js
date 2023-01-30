@@ -96,7 +96,6 @@ function Home() {
             const postsFromServer = await fetchPosts(lat, lon)
             const postsWithinDistance = filterPostsByDistance(lat, lon, postsFromServer)
     
-            //console.log(postsWithinDistance)
             if (postsWithinDistance.length === 0) {
                 document.getElementById('no-posts-to-show-p').classList = 'no-posts-p'
             } 
@@ -114,14 +113,12 @@ function Home() {
         const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/carts/${localStorage.getItem('cart_id')}/`)
         const data = await res.json()
 
-        //console.log(data)
         return data
     }
 
     //Fetch posts
     const fetchPosts = async (latitude, longitude) => {
 
-        //const { latitude, longitude } = position.coords;
         let queryParams = localStorage.getItem('queryParams')
         let searchParams = localStorage.getItem('searchParams')
         let url = `https://hungry-backend-api.herokuapp.com/main/posts/?lat=${latitude}&lon=${longitude}&radius=${distance}`
@@ -145,17 +142,14 @@ function Home() {
         const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/posts/${id}/`)
         const data = await res.json()
 
-        //console.log(data)
         return data
     }
 
     const updatePostServings = async (id, increaseOrDecrease) => {
-        console.log('inside update post servings function')
         let message = ''
         const post = await fetchPost(id)
         if (post.servings_available === 0 && increaseOrDecrease === 1) {
             message = 'Item NOT added to cart because there are 0 servings left'
-            console.log(message)
             return message
         }
         const updatePost = { ...post, servings_available: post.servings_available -= increaseOrDecrease }
@@ -170,13 +164,10 @@ function Home() {
         const response = await res
         if (response.status === 400) {
             message = 'Item NOT added to cart because there are 0 servings left'
-            console.log(message)
             return message
         }
         else if (response.status === 200) {
             const data = await response.json()
-            console.log(data)
-            console.log(data.servings_available)
 
             setPosts(
                 posts.map((post) => 
@@ -185,12 +176,10 @@ function Home() {
             )
 
             message = 'success'
-            console.log(message)
             return message
         }
         else {
             message = 'Sorry, an error occured'
-            console.log(message)
             return message
         }
     }
@@ -214,7 +203,6 @@ function Home() {
         })
         const data = await res.json()
         localStorage.setItem('cart_id', data.id)
-        console.log(data)
     }
 
     const addItemToCart = async (post_id) => {
@@ -230,17 +218,14 @@ function Home() {
             })
         })
         const response = await res
-        console.log(response.status)
         if (response.status === 201) {
             const cartFromServer = await fetchCart()
             setCart(cartFromServer)
         } else {
-            console.log('There was an error adding item to cart')
             setAlertMessage('There was an error adding item to cart')
             setAlertType('errorAlertHome')
         }
-        //const data = await response.json()
-        //console.log(data)
+
     }
 
     // Remove cart item
@@ -253,12 +238,10 @@ function Home() {
         let response = await res
 
         if (response.status === 204) {
-            console.log('deleted successfully')
             const cartFromServer = await fetchCart()
             setCart(cartFromServer)
         }
         else {
-            console.log('error removing cart item from cart')
             setAlertMessage('There was an error removing item from cart')
             setAlertType('errorAlertHome')
         }
@@ -308,7 +291,6 @@ function Home() {
             let response = await res
             
             if (response.status === 200) {
-                console.log('quantity updated successfully')
                 const cartFromServer = await fetchCart()
                 setCart(cartFromServer)
             }
@@ -367,14 +349,14 @@ function Home() {
                 <LocationAndDistance setDistance={setDistance} setLocation={setLocation} distance={distance} location={location} getPosts={getPosts}/>
                 <Filter getPosts={getPosts}/>
 
-                <div id="loading-div" class="displayNone">
+                <div id="loading-div" className="displayNone">
                     <p>Loading...</p>
-                    <div class="loader"></div>
+                    <div className="loader"></div>
                 </div>
 
                 <Posts posts={posts} onAdd={addPostToCart} cart={cart} updateCartItemQuantityAndPostServings={updateCartItemQuantityAndPostServings}/>
 
-                <p id="no-posts-to-show-p" className="displayNone">No posts to show. Try different search or different filters. Try different location.</p>
+                <p id="no-posts-to-show-p" className="displayNone">No posts to show. Try different search or different filters. <br></br> Input Taylor AZ as location to see some posts!</p>
 
             </main>
         </>

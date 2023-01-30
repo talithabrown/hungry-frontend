@@ -7,11 +7,6 @@ import PurchaseOrder from "../components/PurchaseOrder"
 
 function PurchaseHistory() {
 
-    let navigate = useNavigate()
-
-    const [alertType, setAlertType] = useState([ 'hideAlert' ])
-    const [alertMessage, setAlertMessage] = useState([ '' ])
-
     const [orders, setOrders] = useState([])
 
     useEffect(() => {
@@ -21,7 +16,6 @@ function PurchaseHistory() {
         }
 
         getOrders()
-        //console.log(orders)
     }, [])
 
     //Fetch orders
@@ -35,35 +29,7 @@ function PurchaseHistory() {
             }
         })
         const data = await res.json()
-
-        console.log(data)
         return data
-    }
-
-    // fetch single order
-    const fetchOrder = async (id) => {
-        const res = await fetch(`https://hungry-backend-api.herokuapp.com/main/orders/${id}/`,
-        {
-            method: 'GET',
-            headers: {
-                'Authorization': 'JWT '+ localStorage.getItem('jwtAccess'), 
-                'Content-type': 'application/json'
-            }
-        }
-        )
-        const data = await res.json()
-
-        //console.log(data)
-        return data
-    }
-
-    const navigateBack = () => {
-        navigate('/profile')
-    }
-
-
-    const closeAlert = () => {
-        setAlertType('hideAlert')
     }
 
     if (orders !== undefined && orders != null && orders.length > 0) {
@@ -71,7 +37,6 @@ function PurchaseHistory() {
             <>
                 <Header text="Purchase History" link="" imgSrc=""/>
                 <main id="home-main">
-                    <Alert message={alertMessage} type={alertType} closeAlert={closeAlert}/>
                     <Link to='/profile' className="post-detail-back-link"><img src="/images/chevron-left.svg" alt="back icon"/></Link>
 
                     <hr></hr>

@@ -1,4 +1,3 @@
-import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import Header from '../components/Header'
 import Alert from '../components/Alert'
@@ -8,7 +7,6 @@ const NewPost = () => {
 
     const [alertType, setAlertType] = useState([ 'hideAlert' ])
     const [alertMessage, setAlertMessage] = useState([ '' ])
-    //const [postId, setpostId] = useState([ '' ])
 
     const newPost = async (title, description, price, servings, datetime, delivery, 
                           location, ingredientsArray, categoriesArray, postImage, latitude, longitude) => {
@@ -64,7 +62,6 @@ const NewPost = () => {
 
         if (response1.status === 400) {
             const data = await response1.json()
-            console.log(data)
             setAlertType('errorAlert')
             if (data.title) {
               setAlertMessage(data.title)
@@ -108,10 +105,7 @@ const NewPost = () => {
             }
         } else if (response1.ok){
           const data = await response1.json()
-          console.log(data)
-          //setpostId(data.id)
           localStorage.setItem('postId', data.id)
-          console.log(`status code is ${response1.status}`)
         }
 
         if (ingredientsArray.length > 0) {
@@ -130,8 +124,6 @@ const NewPost = () => {
                   
                 }
                 else {
-                    let data = response3.json()
-                    console.log(data)
                     window.scrollTo(0,0)
                     setAlertType('errorAlert')
                     setAlertMessage('Something went wrong, please try again')
@@ -158,8 +150,6 @@ const NewPost = () => {
               setAlertMessage('Successfully Posted!')
           }
           else {
-              let data = response2.json()
-              console.log(data)
               window.scrollTo(0,0)
               setAlertType('errorAlert')
               setAlertMessage('Something went wrong, please try again')

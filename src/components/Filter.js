@@ -20,7 +20,6 @@ const Filter = ({ getPosts }) => {
     }
 
     if (minPrice) {
-        console.log(minPrice)
         queryParamsList.push(`minprice=${minPrice}`)
     }
 
@@ -56,7 +55,6 @@ const Filter = ({ getPosts }) => {
         for (let i =0; i < queryParamsList.length; i++) {
             queryParams = queryParams + '&' + queryParamsList[i]
         }
-        console.log(queryParams)
         localStorage.setItem('queryParams', queryParams)
     }
     else {

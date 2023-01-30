@@ -80,9 +80,6 @@ const EditReview = () => {
               return
             }
         } else if (response.ok){
-          const data = await response.json()
-          console.log(data)
-          console.log(`status code is ${response.status}`)
           window.scrollTo(0,0)
           setAlertType('successAlert')
           setAlertMessage('Successfully Updated!')

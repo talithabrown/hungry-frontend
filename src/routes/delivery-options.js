@@ -26,12 +26,6 @@ function DeliveryOptions() {
     }, [])
 
     const cart = JSON.parse(localStorage.getItem('cart'))
-    //console.log(cart)
-
-    // let pickupItemsArray = []
-    // let deliveryItemsArray = []
-    // let bothItemsArray = []
-    // console.log('hey out here')
 
     const init = () => {
         let pickupItemsArray = []
@@ -47,7 +41,6 @@ function DeliveryOptions() {
             }
             else if (cart.items[i].post.pick_up === true) {
                 pickupItemsArray.push(cart.items[i])
-                console.log(cart.items[i])
             }
         }
 
@@ -126,17 +119,11 @@ function DeliveryOptions() {
         let deliveryItemsArray = JSON.parse(localStorage.getItem('deliveryItemsArray'))
         let pickupItemsArray = JSON.parse(localStorage.getItem('pickupItemsArray'))
 
-        console.log(pickupItemsArray)
-        console.log(deliveryItemsArray)
-        console.log(bothItemsArray)
-
         setDisplayClassNameSelect('displayNone')
         if (delivery === 'pickup') {
             for (let i = 0; i < bothItemsArray.length; i++ ) {
                 pickupItemsArray.push(bothItemsArray[i])
-                console.log(bothItemsArray[i])
             }
-            console.log(pickupItemsArray)
         }
         if (delivery === 'delivery') {
             for (let i = 0; i < bothItemsArray.length; i++ ) {
@@ -170,7 +157,6 @@ function DeliveryOptions() {
         }
 
         if (pickupItemsArray.length > 0) {
-            console.log(pickupItemsArray)
             setPickupItems(pickupItemsArray)
             setDisplayClassNamePickupDiv('show')
         }

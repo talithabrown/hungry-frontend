@@ -11,7 +11,6 @@ const NewPostForm = ({ onSubmitPost }) => {
   const [delivery, setDelivery] = useState('')
   const [datetime, setDatetime] = useState('')
   const [location, setLocation] = useState('')
-  //const [ingredients, setIngredients] = useState('')
   const [postImage, setPostImage] = useState()
 
   const [latitude, setLatitude] = useState()
@@ -30,7 +29,6 @@ const NewPostForm = ({ onSubmitPost }) => {
             ingredientsArray.push(ingredientElements[i].value.trim())
         }
     }
-    //console.log(ingredientsArray)
 
     ///////////////
     let categoryElements = document.getElementsByName('category')
@@ -41,7 +39,6 @@ const NewPostForm = ({ onSubmitPost }) => {
             categoriesArray.push(parseInt(categoryElements[i].value))
         }
     }
-    console.log(categoriesArray)
 
 
     /////////////
@@ -88,13 +85,9 @@ const NewPostForm = ({ onSubmitPost }) => {
         </div>
         <div className='form-control'>
             <label>*Location:</label>
-            {/* <input type='text' required value={location} onChange={(e) => setLocation(e.target.value)}/> */}
             <PostLocation setLocation={setLocation} setLatitude={setLatitude} setLongitude={setLongitude} location={location}/>
         </div>
-        {/* <div className='form-control'>
-            <label>Ingredients:</label>
-            <input type='text' value={ingredients} onChange={(e) => setIngredients(e.target.value)}/>
-        </div> */}
+
         <IngredientsForm />
 
         <label>Select all that apply:</label>

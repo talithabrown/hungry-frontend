@@ -18,15 +18,9 @@ const PostLocation = ({ setLocation, setLatitude, setLongitude, location }) => {
     lng:null
   })
 
-//   const [latitude, setLatitude] = useState()
-//   const [longitude, setLongitude] = useState()
-
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value)
-    console.log(value)
     const ll  = await getLatLng(results[0])
-    console.log(ll.lat)
-    console.log(ll.lng)
     setLatitude(ll.lat)
     setLongitude(ll.lng)
     setAddress(value)
@@ -73,5 +67,3 @@ const PostLocation = ({ setLocation, setLatitude, setLongitude, location }) => {
 }
 
 export default PostLocation
-
-// AIzaSyA8Ft9_0KtBRqn7_QWi06CaxjtMe824ufc

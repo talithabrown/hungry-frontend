@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import Alert from '../components/Alert'
 import Review from "../components/Review"
 
 function ReviewsWrittenByYou() {
-
-    let navigate = useNavigate()
 
     const [alertType, setAlertType] = useState([ 'hideAlert' ])
     const [alertMessage, setAlertMessage] = useState([ '' ])
@@ -21,7 +18,6 @@ function ReviewsWrittenByYou() {
         }
 
         getReviews()
-        //console.log(reviews)
     }, [])
 
     //Fetch orders
@@ -35,14 +31,8 @@ function ReviewsWrittenByYou() {
         })
         const data = await res.json()
 
-        console.log(data)
         return data
     }
-
-    const navigateBack = () => {
-        navigate('/profile')
-    }
-
 
     const closeAlert = () => {
         setAlertType('hideAlert')

@@ -107,7 +107,6 @@ const Profile = () => {
             }
         })
         const data = await res.json()
-        //console.log(data)
         return data
     }
     //////////////////////////
@@ -121,7 +120,6 @@ const Profile = () => {
             }
         })
         const data = await res.json()
-        console.log(data)
         return data
     }
     ////////////////////////////
@@ -132,13 +130,10 @@ const Profile = () => {
             ratingsList.push(reviews[i].rating)
         }
         const sum = ratingsList.reduce((partialSum, a) => partialSum + a, 0)
-        //console.log(`Sum: ${sum}`)
 
         const average = sum / ratingsList.length
-        //console.log(`Avg: ${average}`)
 
         const roundedAverage = Math.round(average*2)/2
-        //console.log(`Rounded: ${roundedAverage}`)
 
         return roundedAverage
     }
@@ -150,10 +145,6 @@ const Profile = () => {
         localStorage.setItem('back-link', '/profile')
         navigate('/profile-reviews')
     }
-
-    //////////////////////////
-
-    const fullName = `${user.first_name} ${user.last_name}`
 
     /////////////////////////
 
@@ -183,11 +174,9 @@ const Profile = () => {
                 <Link to='/edit-profile'>Edit Profile</Link>
                 <Link to='/purchase-history'>Purchase History</Link>
                 <Link to='/reviews-written-by-you'>Reviews By You</Link>
-                {/* <Link to='/delete-profile'>Delete Profile</Link> */}
                 <Logout />
             </div>
             <main className="profile-main">
-                {/* <Logout /> */}
                 <div className="profile-img-and-bio-p">
                     <img className="profile-image" src={profile.image} alt="profile"/>
                     <p className="bio">{profile.bio}</p>
